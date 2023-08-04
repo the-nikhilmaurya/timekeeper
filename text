@@ -1,0 +1,7 @@
+<% details.forEach((item) => { %>
+            <tr> <td></td>  <td><%= item.timeZone %></td>  <td><%= item.time %></td> <td></td>%> </tr>
+          <% }); %>
+
+
+          delete from timekeeper2
+where country = '' and email = '';

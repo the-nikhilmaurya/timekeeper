@@ -1,0 +1,84 @@
+<%- include('./includes/header') -%>
+ 
+  <body>
+    <div class="container">
+
+    
+      <%- include('./includes/navbar') -%>
+
+      
+        <div class="card mt-5 " style="width: 22rem;" id="profile">
+            <div class="card-body">
+              <h5 class="card-title d-flex justify-content-center"> Hi <%= locals.profile.fname %></h5>
+              
+           
+
+                <div class="mb-4 mt-5 d-flex justify-content-md-start">
+                  <label class="ps-2"  for="name" ><b> FirstName:</b></label>
+                  <input id="" name='name' class="input input-sm ms-3 me-2 rounded-2" style="width:100%" type="text" value=<%= locals.profile.fname %> disabled >
+                </div>
+
+                <div class="mb-4  d-flex justify-content-md-start">
+                    <label class="ps-2"  for="name" ><b> LastName:</b></label>
+                    <input id="" name='name' class="input input-sm ms-3 me-2 rounded-2" style="width:100%" type="text" value=<%= locals.profile.lname %> disabled >
+                  </div>
+    
+                
+                <div class="mb-4 d-flex justify-content-md-start">
+                  <label class="ps-2"  for="email"><b>Email&nbsp;&nbsp;ID:&nbsp;</b></label>
+                  <input id="" name='email' class=" input input-sm ms-3 me-2 rounded-2" style="width:100%" type="text" value=<%= locals.profile.email %> disabled>
+                </div>
+                
+                <div class="mb-4 d-flex justify-content-center">
+                  <button  id="" onclick="profileOff()" type="submit" class="btn btn-dark ps-5 pe-5">Done</button>
+                </div>
+              
+            </div>
+          </div>
+    
+
+
+      <!--  add button -->
+      <div class="container-fluid d-flex justify-content-center mt-2">
+      <form action="/users/insertCountry" method="post">
+      <div class="input-group">
+        <select class="custom-select rounded-2" name="selectedTimezone" id="inputGroupSelect04">
+            <option value=""></option>
+            <% dropdownList.forEach(function(timezone) { %>
+                <option value=<%= timezone %> > <%= timezone %> </option>
+            <% }); %>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">ADD</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+        <!--  list of time zone and their current time  -->
+
+      <table class="table table-hover mt-3">
+        <thead id="tablehead">
+          <tr>
+            <th scope="col">Flag</th>
+            <th scope="col">Country</th>
+            <th scope="col">Time</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% details.forEach((item) => { %>
+            <tr> <td></td>  <td><%= item.timeZone %></td>  <td><%= item.time %></td> <td>
+              <form action="/users/delete" method="post"> <input type="text" style="display: none;" name="deleteRow" value= <%= item.timeZone %> >
+                <button type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIwDf6QiM6JzGQAiwTb3PYU07X2ujSlozduA&usqp=CAU" height="30px" width="30px" alt="" srcset=""> </button></form></td> </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+
+    <%- include('./includes/footer') -%>
