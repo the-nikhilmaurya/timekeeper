@@ -22,7 +22,7 @@ router.use(express.urlencoded({extended : true}))
 
 async function check(email){
     try{
-        const query = ("select * from timekeeper1 where email = $1 ;")
+        const query = ("select * from timekeeper where email = $1 ;")
         const result = await pool.query(query,[email]);
     
         if(result.rowCount === 0){
@@ -50,7 +50,7 @@ router.post('/',async(req,res)=>{
     else{
     try{
         
-        const insert = 'insert into timekeeper1 (fname,lname,email,password) values ($1,$2,$3,$4) RETURNING *';
+        const insert = 'insert into timekeeper (fname,lname,email,password) values ($1,$2,$3,$4) RETURNING *';
         const result = await pool.query(insert,[fname,lname,email,password]);
         console.log('Data inserted successfully',result.rows[0]);
         err = ""
@@ -77,7 +77,7 @@ router.post('/login',async(req,res)=>{
     // console.log(req.body)
     var err  = ""
     try{
-        const query = ("select * from timekeeper1 where email = $1 and password = $2 ;")
+        const query = ("select * from timekeeper where email = $1 and password = $2 ;")
         const result = await pool.query(query,[email,password]);
 
         if(result.rowCount === 0){
@@ -268,7 +268,7 @@ router.post('/insertCountry',async (req, res) => {
 
   async function giveProfile(email){
     try{
-        const query = ("select * from timekeeper1 where email = $1 ;")
+        const query = ("select * from timekeeper where email = $1 ;")
         const result = await pool.query(query,[email]);
     
         if(result.rowCount === 0){
